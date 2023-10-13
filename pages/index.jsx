@@ -105,7 +105,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               >
                 <div className='container'>
                   <div className='row justify-content-center'>
-                    <div className='col-lg-8'>
+                    <div className='col-lg-10'>
                       <div
                         className='slider_content text-center'
                         style={{ paddingTop: 0 }}
