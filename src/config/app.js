@@ -28,7 +28,7 @@ const baseConfig = {
   },
   ogTags: {
     logo: 'assets/images/aw-ring-logo.png',
-    siteName: 'https://adewale-weds-tiwa.vercel.app/',
+    siteName: 'https://fuglydami.github.io/adewale-wedding/',
     publishedTime: '2023-09-07',
   },
 };

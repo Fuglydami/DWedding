@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Add basePath
-  basePath: 'https://fuglydami.github.io/adewale-wedding',
+  basePath: 'adewale-wedding',
 };
 
 module.exports = nextConfig;
