@@ -1,80 +1,8 @@
 {
-  "react-qr-reader": [
+  "./dev/noop": [
     {
-      "id": "+wdc",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "16Al",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "17x9",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "8L3h",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "QCnb",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "WbBG",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "f/k9",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "i8i4",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "q1tI",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "viRO",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "yl30",
-      "file": "static/chunks/framework.e47e02357108c0248b1a.js"
-    },
-    {
-      "id": "0JNz",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "4ZBv",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "8D0k",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "KCt4",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "RnoV",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "jL1o",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "oiY+",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
-    },
-    {
-      "id": "tPLA",
-      "file": "static/chunks/11.26a355f24cf384fd4a57.js"
+      "id": "./node_modules/next/dist/client/dev/noop.js",
+      "file": "static/chunks/0.js"
     }
   ]
 }
