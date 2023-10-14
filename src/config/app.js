@@ -22,12 +22,12 @@ const baseConfig = {
     mapUrl: 'https://goo.gl/maps/mwseWsNoHxvXLpMSA',
   },
   logo: {
-    headerLogo: 'assets/images/ring-svg.PNG',
+    headerLogo: 'assets/images/ring-svg.png',
     footerLogo: 'assets/video/aw-ring-logo-ticker.mp4',
     footerLogoType: 'mp4',
   },
   ogTags: {
-    logo: 'assets/images/aw-ring-logo.PNG',
+    logo: 'assets/images/aw-ring-logo.png',
     siteName: 'https://fuglydami.github.io/adewale-wedding/',
     publishedTime: '2023-09-07',
   },
