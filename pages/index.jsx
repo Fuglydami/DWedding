@@ -180,7 +180,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                     buttonLabel={t('btnAddToMyCalendar')}
                   />
                 </div>
-                <img src='/assets/images/section_shape.png' alt='Shape' />
+                <img src='assets/images/section_shape.png' alt='Shape' />
               </div>
             </div>
             <div className='col-lg-8'>
@@ -212,7 +212,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                       <a href={venue.mapUrl}>
                         <img
                           style={{ borderRadius: 5 }}
-                          src='/assets/images/oval-hotel-map-horizontal.png'
+                          src='assets/images/oval-hotel-map-horizontal.png'
                           alt='oval hotel map'
                         />
                       </a>
