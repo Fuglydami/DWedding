@@ -138,6 +138,11 @@ p {
   font-size: 45px;
   color: #d59a57;
 }
+.form_title {
+  font-family: poppins, sans-serif;
+  font-size: 16px;
+  color: #d59a57;
+}
 @media (max-width: 767px) {
   .section_title .title {
     font-size: 34px;

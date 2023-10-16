@@ -7,6 +7,8 @@ import resolvePath from '@src/utils/resolvePath';
 import appConfig from '@src/config/app';
 import { useTranslation, defaultLocale } from '@src/i18n';
 import guestList from './guest_list.json';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const translateConfig = (appConfig, locale) => {
   if (!locale || locale === defaultLocale) {
@@ -34,7 +36,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
     weddingTime,
     calendarInfo,
   } = translateConfig(appConfig, guest.locale);
-  const { brideName, groomName, coupleNameFormat } = coupleInfo;
+  const { brideName, groomName, hashtag, coupleNameFormat } = coupleInfo;
 
   const coupleNameStr =
     coupleNameFormat === 'GROOM_FIRST'
@@ -69,6 +71,48 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
     location: `${venue.city}, ${venue.country}`,
     startTime: calendarInfo.timeStartISO,
     endTime: calendarInfo.timeEndISO,
+  };
+
+  const [name, setName] = useState('');
+  const [attending, setAttending] = useState('');
+  const [email, setEmail] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const scriptUrl =
+    'https://script.google.com/macros/s/AKfycbxT2ULa9alnZIvTQifLty40uuOnafTTCm2rXQFeiDOb7ERi716dteMZCH5mqU_pxRDtfA/exec';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !email || !attending) {
+      Swal.fire('', 'All fields are required', 'error');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await fetch(proxyUrl + scriptUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, attending }),
+      });
+
+      const data = await response.text();
+      console.log(data);
+      Swal.fire('Success!', 'We appreciate your response!', 'success');
+      setAttending('');
+      setEmail('');
+      setName('');
+      // Response from Google Script
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -123,6 +167,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                         >
                           {t('siteIntro')}
                         </h5>
+
                         <h2
                           className='slider_title'
                           data-animation='fadeInUp'
@@ -131,6 +176,14 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                         >
                           {coupleName}
                         </h2>
+                        <h5
+                          className='location'
+                          data-animation='fadeInUp'
+                          data-delay='1s'
+                          style={{ animationDelay: '1s' }}
+                        >
+                          {hashtag}
+                        </h5>
                         <span
                           className='location'
                           data-animation='fadeInUp'
@@ -212,8 +265,8 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                       <a href={venue.mapUrl}>
                         <img
                           style={{ borderRadius: 5 }}
-                          src='assets/images/oval-hotel-map-horizontal.png'
-                          alt='oval hotel map'
+                          src='assets/images/bevent.png'
+                          alt='bevent center'
                         />
                       </a>
                       <a
@@ -330,6 +383,57 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                       {weddingDate} · {weddingTime}
                     </b>
                   </p>
+                  {/* attending form */}
+                  <div className='container mt-5'>
+                    <h2 className='form_title mb-2'>
+                      Inform Us of your availability
+                    </h2>
+                    <form onSubmit={handleSubmit}>
+                      <div className='row mb-3'>
+                        <div className='col-md-6'>
+                          <label htmlFor='name' className='form-label'>
+                            Name:
+                          </label>
+                          <input
+                            type='text'
+                            className='form-control'
+                            id='name'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </div>
+                        <div className='col-md-6'>
+                          <label htmlFor='email' className='form-label'>
+                            Email:
+                          </label>
+                          <input
+                            type='email'
+                            className='form-control'
+                            id='email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className='mb-3'>
+                        <label htmlFor='attending' className='form-label'>
+                          Will you be attending?
+                        </label>
+                        <textarea
+                          type='number'
+                          className='form-control'
+                          id='attending'
+                          value={attending}
+                          onChange={(e) => setAttending(e.target.value)}
+                        />
+                      </div>
+
+                      <button type='submit' className='btn btn-primary'>
+                        {isLoading ? 'Submitting...' : 'Submit'}
+                      </button>
+                    </form>
+                  </div>
+                  {/* response modal */}
 
                   {t('invitationClosing') &&
                     !t('invitationClosing').startsWith('[missing') && (
@@ -375,11 +479,16 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               {/* <img src={logo.footerLogo} /> */}
               {/* ))} */}
             </div>
-            <div className='footer_title mb-10'>
+            <div className='footer_title '>
               <h3 className='title'>{coupleName}</h3>
             </div>
           </div>
         </div>
+        <h5
+          style={{ color: 'grey', textAlign: 'center', marginBottom: '40px' }}
+        >
+          #DWedding
+        </h5>
       </footer>
     </div>
   );

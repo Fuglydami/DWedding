@@ -20,6 +20,7 @@
     "react-dom": "^16.12.0",
     "react-qr-reader": "^2.2.1",
     "shortid": "^2.2.15",
+    "sweetalert2": "^11.7.32",
     "swr": "^0.1.16"
   },
   "devDependencies": {

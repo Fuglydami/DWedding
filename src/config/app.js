@@ -1,25 +1,26 @@
 const baseConfig = {
-  weddingDay: 'Saturday',
+  weddingDay: 'Sunday',
   weddingTime: '12.00 - 15.00',
-  weddingDate: 'Dec 10, 2023',
+  weddingDate: 'Dec 16, 2023',
   showBuiltWithInfo: true,
   showQrCode: false,
   calendarInfo: {
-    timeStartISO: '2023-09-07T19:00:00+08:00',
-    timeEndISO: '2023-09-07T21:00:00+08:00',
+    timeStartISO: '2023-12-16T19:00:00+08:00',
+    timeEndISO: '2023-12-16T21:00:00+08:00',
   },
   coupleInfo: {
     brideName: 'Oladunni ',
     groomName: 'Adewale',
     coupleNameFormat: 'GROOM_FIRST',
+    hashtag: '#DWedding',
   },
   venue: {
-    name: 'Eko Hotel',
-    addressLine1: 'Eko hotel V.I Lagos State,',
+    name: 'BEVENT CENTER',
+    addressLine1: 'No 111 obafemi awolowo way ikeja Lagos, Nigeria',
     // addressLine2: 'Eko hotel V.I Lagos State',
     city: 'Lagos',
     country: 'Nigeria',
-    mapUrl: 'https://goo.gl/maps/mwseWsNoHxvXLpMSA',
+    mapUrl: 'https://maps.app.goo.gl/KhoFDMUntbTU6L3y9',
   },
   logo: {
     headerLogo: 'assets/images/ring-svg.png',
