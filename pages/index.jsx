@@ -81,7 +81,27 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
 
   const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const scriptUrl =
-    'https://script.google.com/macros/s/AKfycbxT2ULa9alnZIvTQifLty40uuOnafTTCm2rXQFeiDOb7ERi716dteMZCH5mqU_pxRDtfA/exec';
+    'https://script.google.com/macros/s/AKfycbz2UFuOX4jhUzM17LMakLecQLO1kMd2YS4mxxoJiD6BTrMmzCsVedvhFPoxptjJ7jC5lg/exec';
+
+  function httpStatus(statusCode) {
+    if (statusCode >= 200 && statusCode <= 299) {
+      Swal.fire('Success!', 'We appreciate your response!', 'success');
+      setAttending('');
+      setEmail('');
+      setName('');
+    } else if (statusCode >= 400 && statusCode <= 499) {
+      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
+    } else if (statusCode >= 500) {
+      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
+    } else {
+      return 'unknown status';
+    }
+  }
+
+  function buildCorsFreeUrl(target) {
+    return `https://proxy.cors.sh/${target}`;
+  }
+  const corsFreeUrl = buildCorsFreeUrl(scriptUrl);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,7 +112,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
     }
     setIsLoading(true);
     try {
-      const response = await fetch(proxyUrl + scriptUrl, {
+      const response = await fetch(corsFreeUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,12 +120,10 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         body: JSON.stringify({ name, email, attending }),
       });
 
+      console.log(response, 'reponse');
       const data = await response.text();
-      console.log(data);
-      Swal.fire('Success!', 'We appreciate your response!', 'success');
-      setAttending('');
-      setEmail('');
-      setName('');
+      httpStatus(response.status);
+
       // Response from Google Script
       setIsLoading(false);
     } catch (error) {
