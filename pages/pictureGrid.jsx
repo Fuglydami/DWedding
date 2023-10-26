@@ -3,9 +3,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Blurhash } from 'react-blurhash';
 const PicturesGrid = () => {
   const pictures = [
+    'assets/images/pic (1).jpg',
     'assets/images/pic (2).jpg',
     'assets/images/pic (3).jpg',
-    'assets/images/pic (1).jpg',
     'assets/images/pic (4).jpg',
     'assets/images/pic (5).jpg',
     'assets/images/pic (6).jpg',
@@ -23,27 +23,27 @@ const PicturesGrid = () => {
   const handleSelectPicture = (picture) => {
     setSelectedPicture(picture);
   };
-  useEffect(() => {
-    const loadImages = async () => {
-      for (const picture of pictures) {
-        const img = new Image();
-        img.onload = () => {
-          setLoadedImagesCount((prevCount) => prevCount + 1);
-        };
-        console.log(img, 'imagee');
-        img.src = picture;
-        await new Promise((resolve) => (img.onload = resolve));
-      }
+  // useEffect(() => {
+  //   const loadImages = async () => {
+  //     for (const picture of pictures) {
+  //       const img = new Image();
+  //       img.onload = () => {
+  //         setLoadedImagesCount((prevCount) => prevCount + 1);
+  //       };
 
-      // setImageLoaded(true);
-    };
+  //       img.src = picture;
+  //       await new Promise((resolve) => (img.onload = resolve));
+  //     }
 
-    loadImages();
+  //     // setImageLoaded(true);
+  //   };
 
-    if (loadedImagesCount === pictures.length) {
-      setImageLoaded(true);
-    }
-  }, [pictures, loadedImagesCount]);
+  //   loadImages();
+
+  //   if (loadedImagesCount === pictures.length) {
+  //     setImageLoaded(true);
+  //   }
+  // }, [pictures, loadedImagesCount]);
 
   return (
     <>
@@ -70,11 +70,16 @@ const PicturesGrid = () => {
                 />
               </div> */}
               {/* <div style={{ display: !imageLoaded ? 'none' : 'inline' }}> */}
-              <LazyLoadImage
+              {/* <LazyLoadImage
                 src={picture}
                 className='grid-img'
                 effect='blur'
                 width={'100%'}
+                alt={`Picture ${index + 1}`}
+              /> */}
+              <img
+                src={picture}
+                className='grid-img'
                 alt={`Picture ${index + 1}`}
               />
               {/* </div> */}

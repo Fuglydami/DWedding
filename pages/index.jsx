@@ -16,14 +16,12 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const LoveTitleIcon = () => {
   return (
-    <LazyLoadImage
+    <img
       src='assets/images/wine.png'
       style={{
         width: '80px',
         height: '80px',
       }}
-      effect='blur'
-      width={'100%'}
       alt='wine illustrator'
     />
   );
