@@ -9,10 +9,10 @@ import { useTranslation, defaultLocale } from '@src/i18n';
 import guestList from './guest_list.json';
 import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
-import { EventDateIcon, HeaderLogo, LoveTitleIcon } from './extra';
-import Stories from './stories';
-import PicturesGrid from './pictureGrid';
-import CollectGuestAttendance from './collect-guest-attendance';
+import { EventDateIcon, HeaderLogo, LoveTitleIcon } from './extra.page';
+import Stories from './stories.page';
+import PicturesGrid from './pictureGrid.page';
+import CollectGuestAttendance from './collect-guest-attendance.page';
 
 const translateConfig = (appConfig, locale) => {
   if (!locale || locale === defaultLocale) {
