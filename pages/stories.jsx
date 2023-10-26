@@ -19,7 +19,7 @@ const Bride = () => {
             width: '100rem',
             height: '25rem',
           }}
-          src='/assets/images/background.jpg'
+          src='assets/images/background.jpg'
           alt='bride stories'
         />
       </div>
@@ -46,7 +46,7 @@ const Groom = () => {
             width: '100rem',
             height: '25rem',
           }}
-          src='/assets/images/background.jpg'
+          src='assets/images/background.jpg'
           alt='bride stories'
         />
       </div>

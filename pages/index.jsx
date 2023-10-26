@@ -17,7 +17,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const LoveTitleIcon = () => {
   return (
     <LazyLoadImage
-      src='/assets/images/wine.png'
+      src='assets/images/wine.png'
       style={{
         width: '80px',
         height: '80px',
