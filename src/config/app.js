@@ -1,6 +1,6 @@
 const baseConfig = {
-  weddingDay: 'Sunday',
-  weddingTime: '12.00 - 15.00',
+  weddingDay: 'Saturday',
+  weddingTime: '8am - 8pm',
   weddingDate: 'Dec 16, 2023',
   showBuiltWithInfo: true,
   showQrCode: false,
@@ -15,8 +15,8 @@ const baseConfig = {
     hashtag: '#DWedding',
   },
   venue: {
-    name: 'BEVENT CENTER',
-    addressLine1: 'No 111 obafemi awolowo way ikeja Lagos, Nigeria',
+    name: 'Lahl Bevent Center',
+    addressLine1: '111 obafemi awolowo way ikeja Lagos, Nigeria',
     // addressLine2: 'Eko hotel V.I Lagos State',
     city: 'Lagos',
     country: 'Nigeria',

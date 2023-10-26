@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^4.40.2",
+    "blurhash": "^2.0.5",
     "csv-parser": "^2.3.2",
     "gensync": "^1.0.0-beta.1",
     "i18n-js": "^3.5.1",
@@ -17,10 +18,13 @@
     "qrcode.react": "^1.0.0",
     "react": "^16.12.0",
     "react-add-to-calendar": "^0.1.5",
+    "react-blurhash": "^0.3.0",
     "react-dom": "^16.12.0",
+    "react-lazy-load-image-component": "^1.6.0",
     "react-qr-reader": "^2.2.1",
     "shortid": "^2.2.15",
     "sweetalert2": "^11.7.32",
+    "swiper": "^6.8.4",
     "swr": "^0.1.16"
   },
   "devDependencies": {

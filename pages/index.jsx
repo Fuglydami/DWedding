@@ -7,8 +7,12 @@ import resolvePath from '@src/utils/resolvePath';
 import appConfig from '@src/config/app';
 import { useTranslation, defaultLocale } from '@src/i18n';
 import guestList from './guest_list.json';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
+import { EventDateIcon, HeaderLogo, LoveTitleIcon } from './extra';
+import Stories from './stories';
+import PicturesGrid from './pictureGrid';
+import CollectGuestAttendance from './collect-guest-attendance';
 
 const translateConfig = (appConfig, locale) => {
   if (!locale || locale === defaultLocale) {
@@ -73,65 +77,60 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
     endTime: calendarInfo.timeEndISO,
   };
 
-  const [name, setName] = useState('');
-  const [attending, setAttending] = useState('');
-  const [email, setEmail] = useState('');
+  const eventSchedule = [
+    {
+      icon: <EventDateIcon />,
+      event: 'Church',
+      date: 'Dec 16, 2023',
+      time: '12pm',
+    },
+    {
+      icon: <EventDateIcon />,
+      event: 'Reception',
+      date: 'Dec 16, 2023',
+      time: '2pm',
+    },
+    // {
+    //   icon: <EventDateIcon />,
+    //   event: 'Engagement',
+    //   date: 'Dec 16, 2023',
+    //   time: '2pm',
+    // },
+  ];
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-  const scriptUrl =
-    'https://script.google.com/macros/s/AKfycbz2UFuOX4jhUzM17LMakLecQLO1kMd2YS4mxxoJiD6BTrMmzCsVedvhFPoxptjJ7jC5lg/exec';
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowModal(true);
+    }, 10000);
 
-  function httpStatus(statusCode) {
-    if (statusCode >= 200 && statusCode <= 299) {
-      Swal.fire('Success!', 'We appreciate your response!', 'success');
-      setAttending('');
-      setEmail('');
-      setName('');
-    } else if (statusCode >= 400 && statusCode <= 499) {
-      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
-    } else if (statusCode >= 500) {
-      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
-    } else {
-      return 'unknown status';
-    }
-  }
+    return () => clearTimeout(timer);
+  }, []);
 
-  function buildCorsFreeUrl(target) {
-    return `https://proxy.cors.sh/${target}`;
-  }
-  const corsFreeUrl = buildCorsFreeUrl(scriptUrl);
+  const elementRef = useRef(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = elementRef.current;
+      if (element) {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
 
-    if (!name || !email || !attending) {
-      Swal.fire('', 'All fields are required', 'error');
-      return;
-    }
-    setIsLoading(true);
-    try {
-      const response = await fetch(corsFreeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, attending }),
-      });
+        if (elementPosition < windowHeight * 0.9) {
+          element.classList.add('animated-element'); // Add the CSS class when the element is 75% visible
+        } else {
+          element.classList.remove('animated-element'); // Remove the CSS class if not visible
+        }
+      }
+    };
 
-      console.log(response, 'reponse');
-      const data = await response.text();
-      httpStatus(response.status);
+    window.addEventListener('scroll', handleScroll);
 
-      // Response from Google Script
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
-      console.error('Error:', error);
-    }
-  };
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); // Run this effect only once when the component is mounted
 
   return (
     <div>
@@ -156,15 +155,14 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         author={resolvePath('/')}
       />
       <section className='header_area'>
+        <header className='header-container'>
+          <HeaderLogo />
+          <span className='header-logo-text'>The Akinlagun's Party</span>
+        </header>
         <div id='home' className='header_slider'>
           <div className='slick-list draggable'>
             <div className='slick-track' style={{ opacity: 1 }}>
-              <div
-                className='single_slider bg_cover d-flex align-items-center'
-                style={{
-                  height: '100vh',
-                }}
-              >
+              <div className='bg_cover d-flex align-items-center'>
                 <div className='container'>
                   <div className='row justify-content-center'>
                     <div className='col-lg-10'>
@@ -240,6 +238,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               >
                 <h3 className='title'>{t('eventDate')}:</h3>
                 <p>{weddingDateBrief}</p>
+
                 <div
                   style={{
                     paddingTop: '0.2rem',
@@ -294,9 +293,10 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                           overflowX: 'hidden',
                           textOverflow: 'ellipsis',
                           marginTop: 10,
+                          color: 'grey',
                         }}
                       >
-                        {venue.mapUrl}
+                        {venue.addressLine1}
                       </a>
                     </div>
                   </div>
@@ -310,7 +310,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         </div>
       </section>
 
-      <section id='contact' className='contact_area'>
+      <section ref={elementRef} id='contact' className='contact_area'>
         <div className='container'>
           <div
             className='contact_wrapper wow fadeInUpBig'
@@ -325,6 +325,45 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               animationName: 'fadeInUp',
             }}
           >
+            <div className='container-eventLineup'>
+              {eventSchedule.map((ev, index) => {
+                const { time, date, event, icon } = ev;
+                return (
+                  <div className='eventLineup' key={event}>
+                    {icon}
+                    <span
+                      style={{
+                        fontSize: '24px',
+                        color: 'black',
+                        fontWeight: 700,
+                      }}
+                    >
+                      {event}
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        fontSize: '18px',
+                        color: 'black',
+                      }}
+                    >
+                      {date}
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        fontSize: '18px',
+                        color: 'black',
+                      }}
+                    >
+                      {time}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            {/* form */}
+
             <div className='row justify-content-center'>
               <div className='col-lg-9'>
                 <div className='section_title text-center pb-30'>
@@ -341,133 +380,6 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                       <p style={{ fontSize: '1.5rem' }}>{guest.name},</p>
                     </div>
                   )}
-                  <h3 className='title'>{t('invitationIntro')}</h3>
-                  <div
-                    style={{
-                      textAlign: 'left',
-                      paddingTop: 20,
-                      paddingBottom: 20,
-                      maxWidth: 400,
-                      margin: 'auto',
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '1rem',
-                        lineHeight: 'inherit',
-                        color: 'dimgrey',
-                        textAlign: t('invitationContentTextAlign'),
-                      }}
-                    >
-                      <i>
-                        {t('invitationContent')}
-                        {t('invitationOutro') &&
-                          !t('invitationOutro').startsWith('[missing') && (
-                            <>
-                              <br />
-                              <br />
-                              {t('invitationOutro')}
-                            </>
-                          )}
-                      </i>
-                    </p>
-                  </div>
-
-                  {appConfig.showQrCode && guest.name && (
-                    <div style={{ marginTop: 20, marginBottom: 35 }}>
-                      <QRCode value={guest.guestId} />
-                    </div>
-                  )}
-
-                  <p className='text'>
-                    <a
-                      href={venue.mapUrl}
-                      style={{
-                        borderBottom: '0.2rem solid',
-                        marginBottom: 10,
-                      }}
-                    >
-                      <b>{venue.name}</b>
-                    </a>
-                    <br />
-                    {venue.addressLine1}
-                    <br />
-                    {/* {venue.addressLine2}
-                    <br /> */}
-                    {venue.country}.
-                  </p>
-                  <p className='text' style={{ marginTop: 10 }}>
-                    <b>
-                      {weddingDate} · {weddingTime}
-                    </b>
-                  </p>
-                  {/* attending form */}
-                  <div className='container mt-5'>
-                    <h2 className='form_title mb-2'>
-                      Inform Us of your availability
-                    </h2>
-                    <form onSubmit={handleSubmit}>
-                      <div className='row mb-3'>
-                        <div className='col-md-6'>
-                          <label htmlFor='name' className='form-label'>
-                            Name:
-                          </label>
-                          <input
-                            type='text'
-                            className='form-control'
-                            id='name'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                        </div>
-                        <div className='col-md-6'>
-                          <label htmlFor='email' className='form-label'>
-                            Email:
-                          </label>
-                          <input
-                            type='email'
-                            className='form-control'
-                            id='email'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className='mb-3'>
-                        <label htmlFor='attending' className='form-label'>
-                          Will you be attending?
-                        </label>
-                        <textarea
-                          type='number'
-                          className='form-control'
-                          id='attending'
-                          value={attending}
-                          onChange={(e) => setAttending(e.target.value)}
-                        />
-                      </div>
-
-                      <button type='submit' className='btn btn-primary'>
-                        {isLoading ? 'Submitting...' : 'Submit'}
-                      </button>
-                    </form>
-                  </div>
-                  {/* response modal */}
-
-                  {t('invitationClosing') &&
-                    !t('invitationClosing').startsWith('[missing') && (
-                      <p
-                        className='text'
-                        style={{
-                          fontStyle: 'italic',
-                          maxWidth: 420,
-                          margin: 'auto',
-                          marginTop: 60,
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html: t('invitationClosing'),
-                        }}
-                      ></p>
-                    )}
                 </div>
               </div>
             </div>
@@ -475,6 +387,33 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         </div>
       </section>
 
+      <section
+        data-animation='fadeInUp'
+        data-delay='0.7s'
+        className='love-title-container fadeInUpBig fadeIn'
+        data-wow-duration='1.3s'
+        data-wow-delay='0.4s'
+      >
+        <div ref={elementRef}>
+          <LoveTitleIcon />
+        </div>
+        <div ref={elementRef} className='love-title'>
+          My heart is your to hold and cherish for the rest of our days.
+        </div>
+      </section>
+      <article
+        ref={elementRef}
+        data-animation='fadeInUp'
+        data-delay='0.7s'
+        className='stories-container fadeInUpBig'
+        data-wow-duration='1.3s'
+        data-wow-delay='0.4s'
+      >
+        <Stories />
+      </article>
+      <article className='picture-grid-container'>
+        <PicturesGrid />
+      </article>
       {/* Footer section */}
       <footer id='footer' className='footer_area'>
         <div className='footer_shape_1'>
@@ -498,16 +437,31 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               {/* ))} */}
             </div>
             <div className='footer_title '>
-              <h3 className='title'>{coupleName}</h3>
+              <h3
+                style={{
+                  color: 'white',
+                }}
+                className='title'
+              >
+                {coupleName}
+              </h3>
             </div>
           </div>
         </div>
         <h5
-          style={{ color: 'grey', textAlign: 'center', marginBottom: '40px' }}
+          style={{
+            color: '#D3D3D3',
+            textAlign: 'center',
+            marginBottom: '40px',
+          }}
         >
           #DWedding
         </h5>
       </footer>
+      <CollectGuestAttendance
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </div>
   );
 };
