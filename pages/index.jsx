@@ -131,11 +131,11 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
   const coupleName =
     coupleNameFormat === 'GROOM_FIRST' ? (
       <>
-        {groomName} <span>&amp;</span> {brideName}
+        {brideName} <span>&amp;</span> {groomName}
       </>
     ) : (
       <>
-        {brideName} <span>&amp;</span> {groomName}
+        {groomName} <span>&amp;</span> {brideName}
       </>
     );
 
@@ -475,6 +475,63 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               </div>
             </div>
           </div>
+          <div className='fadeIn'>
+            <h4
+              style={{
+                textAlign: 'center',
+                marginBottom: '5px',
+              }}
+            >
+              Colors of the day
+            </h4>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '50px',
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                  }}
+                >
+                  Teal Green
+                </p>
+                <div
+                  style={{
+                    height: '30px',
+                    width: '80px',
+                    borderRadius: '10px',
+                    color: 'black',
+                    backgroundColor: '#008080',
+                  }}
+                />
+              </div>
+              <div>
+                <p
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                  }}
+                >
+                  Gold
+                </p>
+                <div
+                  style={{
+                    height: '30px',
+                    width: '80px',
+                    borderRadius: '10px',
+                    color: 'black',
+                    backgroundColor: '#d59a57',
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -490,7 +547,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
           <LoveTitleIcon />
         </div>
         <div className='love-title'>
-          My heart is your to hold and cherish for the rest of our days.
+          My heart is yours to hold and cherish for the rest of our days.
         </div>
       </section>
       <article

@@ -1856,14 +1856,10 @@ p.form-message.error.form-message.error {
   font-weight: 600;
   line-height: 30px;
 }
-.stories-img-container {
-  /* width: 50vw;
-  height: 50vh; */
-}
 
 .bride-container {
   display: flex;
-  gap: 70px;
+  gap: 30px;
   margin: 100px 0;
 }
 
@@ -1914,9 +1910,7 @@ p.form-message.error.form-message.error {
   object-fit: cover;
   height: 300px;
 }
-.grid-img:hover {
-  filter: grayscale(100%);
-}
+
 /* Media query for medium screens */
 @media (min-width: 769px) and (max-width: 1024px) {
   .picture-grid-container {

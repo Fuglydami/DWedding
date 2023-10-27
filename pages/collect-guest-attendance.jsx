@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-
+import { send } from 'emailjs-com';
 const CollectGuestAttendance = ({ setShowModal, showModal }) => {
   const [name, setName] = useState('');
-  const [attending, setAttending] = useState('');
+  const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const scriptUrl =
-    'https://script.google.com/macros/s/AKfycbxapNtm8Jv2QCNYt4CqGJ_mVpEEKERO9fXU8HrTexuDWthmxiQF9NFck6rIjPZ-LgdRHg/exec';
 
   function httpStatus(statusCode) {
     if (statusCode >= 200 && statusCode <= 299) {
       Swal.fire('Success!', 'We appreciate your response!', 'success');
       setShowModal(false);
-      setAttending('');
+      setMessage('');
       setEmail('');
       setName('');
     } else if (statusCode >= 400 && statusCode <= 499) {
@@ -27,39 +24,30 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
     }
   }
 
-  function buildCorsFreeUrl(target) {
-    return `https://proxy.cors.sh/${target}`;
-  }
-  const corsFreeUrl = buildCorsFreeUrl(scriptUrl);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !attending) {
+    if (!name || !email || !message) {
       Swal.fire('', 'All fields are required', 'error');
       return;
     }
     setIsLoading(true);
-    try {
-      const response = await fetch(corsFreeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, attending }),
+
+    await send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+      { name, email, message },
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+    )
+      .then((response) => {
+        httpStatus(response.status);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
       });
 
-      console.log(response, 'reponse');
-      const data = await response.text();
-      httpStatus(response.status);
-
-      // Response from Google Script
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      Swal.fire('Error!', 'Something went wrong, please try again!', 'error');
-      console.error('Error:', error);
-    }
+    setIsLoading(false);
   };
   return (
     <div
@@ -89,7 +77,7 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
                 }}
                 className='form_title mb-4'
               >
-                Inform Us of your availability
+                Inform us of your availability
               </h2>
               <form onSubmit={handleSubmit}>
                 <div className='row mb-3'>
@@ -107,6 +95,7 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
                       style={{
                         borderRadius: '10px',
                         height: '45px',
+                        color: 'black',
                         backgroundColor: 'transparent',
                       }}
                       type='text'
@@ -130,6 +119,7 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
                       style={{
                         borderRadius: '10px',
                         height: '45px',
+                        color: 'black',
                         backgroundColor: 'transparent',
                       }}
                       type='email'
@@ -155,12 +145,13 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
                     type='number'
                     style={{
                       borderRadius: '10px',
+                      color: 'black',
                       backgroundColor: 'transparent',
                     }}
                     className='form-control'
                     id='attending'
-                    value={attending}
-                    onChange={(e) => setAttending(e.target.value)}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   />
                 </div>
 

@@ -3,19 +3,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Blurhash } from 'react-blurhash';
 const PicturesGrid = () => {
   const pictures = [
-    'assets/images/pic (1).jpg',
-    'assets/images/pic (2).jpg',
-    'assets/images/pic (3).jpg',
-    'assets/images/pic (4).jpg',
-    'assets/images/pic (5).jpg',
-    'assets/images/pic (6).jpg',
-    'assets/images/pic (7).jpg',
-    'assets/images/pic (8).jpg',
-    'assets/images/pic (9).jpg',
-    'assets/images/pic (10).jpg',
-    'assets/images/pic (11).jpg',
-    'assets/images/pic (12).jpg',
-    'assets/images/pic (13).jpg',
+    'assets/images/couple (1).jpg',
+    // 'assets/images/couple (2).jpg',
+    // 'assets/images/couple (3).jpg',
+    'assets/images/couple (4).jpg',
+    // 'assets/images/couple (5).jpg',
+    'assets/images/couple (6).jpg',
+    'assets/images/couple (7).jpg',
+    'assets/images/couple (8).jpg',
+    'assets/images/couple (9).jpg',
+    // 'assets/images/couple (10).jpg',
+    // 'assets/images/couple (11).jpg',
+    // 'assets/images/couple (12).jpg',
+    'assets/images/couple (13).jpg',
   ];
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
