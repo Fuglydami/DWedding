@@ -185,7 +185,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
-    }, 1000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
