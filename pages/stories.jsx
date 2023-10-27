@@ -26,7 +26,7 @@ const content = [
     On the 4th of April 2016, I sent her a DM and we started talking. We
     became really really close. Later in November I asked her to be my
     girlfriend and here we are today🥰 getting married.`,
-    image: 'assets/images/pic (1).jpg',
+    image: 'assets/images/pic (8).jpg',
   },
 ];
 const Stories = () => {

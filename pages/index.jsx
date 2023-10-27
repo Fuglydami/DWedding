@@ -245,9 +245,18 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
           <div className='slick-list draggable'>
             <div className='slick-track' style={{ opacity: 1 }}>
               <div className='bg_cover d-flex align-items-center'>
-                <div className='container'>
+                <img
+                  src='assets/images/pic (8).jpg'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  alt='background image'
+                />
+                <div className=' content-overlay'>
                   <div className='row justify-content-center'>
-                    <div className='col-lg-10'>
+                    <div className='col-lg-24'>
                       <div
                         className='slider_content text-center'
                         style={{ paddingTop: 0 }}
@@ -392,7 +401,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         </div>
       </section>
 
-      <section ref={elementRef} id='contact' className='contact_area'>
+      <section id='contact' className='contact_area'>
         <div className='container'>
           <div
             className='contact_wrapper wow fadeInUpBig'
@@ -407,7 +416,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
               animationName: 'fadeInUp',
             }}
           >
-            <div className='container-eventLineup'>
+            <div ref={elementRef} className='container-eventLineup'>
               {eventSchedule.map((ev, index) => {
                 const { time, date, event, icon } = ev;
                 return (
@@ -470,16 +479,17 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
       </section>
 
       <section
+        ref={elementRef}
         data-animation='fadeInUp'
         data-delay='0.7s'
         className='love-title-container fadeInUpBig fadeIn'
         data-wow-duration='1.3s'
         data-wow-delay='0.4s'
       >
-        <div ref={elementRef}>
+        <div>
           <LoveTitleIcon />
         </div>
-        <div ref={elementRef} className='love-title'>
+        <div className='love-title'>
           My heart is your to hold and cherish for the rest of our days.
         </div>
       </section>
