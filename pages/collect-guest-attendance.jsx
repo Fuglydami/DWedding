@@ -56,6 +56,7 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
       role='dialog'
       style={{
         display: showModal ? 'block' : 'none',
+
         color: 'black',
       }}
     >

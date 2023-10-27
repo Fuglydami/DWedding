@@ -8,7 +8,7 @@ const PicturesGrid = () => {
     // 'assets/images/couple (3).jpg',
     'assets/images/couple (4).jpg',
     // 'assets/images/couple (5).jpg',
-    'assets/images/couple (6).jpg',
+    // 'assets/images/couple (6).jpg',
     'assets/images/couple (7).jpg',
     'assets/images/couple (8).jpg',
     'assets/images/couple (9).jpg',
