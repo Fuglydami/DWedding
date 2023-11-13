@@ -26,29 +26,10 @@ const Icon = () => {
   );
 };
 
-const CashGift = ({ setShowAccountDetails }) => {
+const CashGift = ({ setShowAccountDetails, showAccountDetails }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <section
-      className='cashGift'
-      //   style={{
-      //     left: '50%',
-      //     transform: 'translateX(-50%)',
-
-      //     position: 'fixed',
-      //     bottom: '2%',
-      //     zIndex: 10000000,
-      //     width: 'auto',
-
-      //     padding: '24px 80px',
-      //     borderRadius: '10px',
-      //     maxWidth: '670px',
-      //     margin: '24px 0',
-      //     backgroundColor: '#fff',
-      //     boxShadow:
-      //       '0.2px 0.4px 0.5px rgba(161,161,161,.36), 0.5px 1.3px 1.6px -0.8px rgba(161,161,161,.36), 1.3px 3.4px 4.1px -1.7px rgba(161,161,161,.36), 3.1px 8.2px 9.9px -2.5px rgba(161,161,161,.36)',
-      //   }}
-    >
+    <section className='cashGift'>
       <div
         style={{
           display: 'flex',
@@ -57,7 +38,7 @@ const CashGift = ({ setShowAccountDetails }) => {
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => setShowAccountDetails(true)}
+        onClick={() => setShowAccountDetails(!showAccountDetails)}
       >
         <div
           style={{
