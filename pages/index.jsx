@@ -614,7 +614,12 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-      {!showModal && <CashGift setShowAccountDetails={setShowAccountDetails} />}
+      {!showModal && (
+        <CashGift
+          showAccountDetails={showAccountDetails}
+          setShowAccountDetails={setShowAccountDetails}
+        />
+      )}
       {showAccountDetails && (
         <AccountDetails
           showAccountDetails={showAccountDetails}
