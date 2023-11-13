@@ -182,7 +182,7 @@ p {
   /* color: var(--neon-text-color); */
 }
 
-.modalBackground{
+.modalBackground {
   background-color: rgba(0, 0, 0, 0.296);
 }
 
@@ -2162,4 +2162,32 @@ p.form-message.error.form-message.error {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+}
+.cashGift {
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  bottom: 2%;
+  z-index: 10000000;
+  width: auto;
+  padding: 24px 80px;
+  border-radius: 10px;
+  max-width: 670px;
+  margin: 24px 0;
+  background-color: #fff;
+  box-shadow: 0.2px 0.4px 0.5px rgba(161, 161, 161, 0.36),
+    0.5px 1.3px 1.6px -0.8px rgba(161, 161, 161, 0.36),
+    1.3px 3.4px 4.1px -1.7px rgba(161, 161, 161, 0.36),
+    3.1px 8.2px 9.9px -2.5px rgba(161, 161, 161, 0.36);
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .cashGift {
+    padding: 24px 55px;
+  }
+}
+@media (max-width: 767px) {
+  .cashGift {
+    padding: 24px 55px;
+  }
 }
