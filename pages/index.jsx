@@ -13,6 +13,8 @@ import Stories from './stories';
 import PicturesGrid from './pictureGrid';
 import CollectGuestAttendance from './collect-guest-attendance';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import CashGift from './cashGift';
+import AccountDetails from './accountDetails';
 
 const LoveTitleIcon = () => {
   return (
@@ -181,6 +183,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
   ];
 
   const [showModal, setShowModal] = useState(false);
+  const [showAccountDetails, setShowAccountDetails] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -611,6 +614,13 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
         showModal={showModal}
         setShowModal={setShowModal}
       />
+      {!showModal && <CashGift setShowAccountDetails={setShowAccountDetails} />}
+      {showAccountDetails && (
+        <AccountDetails
+          showAccountDetails={showAccountDetails}
+          setShowAccountDetails={setShowAccountDetails}
+        />
+      )}
     </div>
   );
 };

@@ -67,7 +67,14 @@ const CollectGuestAttendance = ({ setShowModal, showModal }) => {
             className='close guest-modal'
             onClick={() => setShowModal(false)}
           >
-            <span aria-hidden='true'>&times;</span>
+            <span
+              style={{
+                color: 'white',
+              }}
+              aria-hidden='true'
+            >
+              &#10005;
+            </span>
           </div>
 
           <div className='modal-body'>
