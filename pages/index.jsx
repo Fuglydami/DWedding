@@ -249,7 +249,7 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
             <div className='slick-track' style={{ opacity: 1 }}>
               <div className='bg_cover d-flex align-items-center'>
                 <img
-                  src='assets/images/pic (8).jpg'
+                  src='assets/images/dwedding (12).jpg'
                   style={{
                     width: '100%',
                     height: '100%',
