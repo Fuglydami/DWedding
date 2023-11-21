@@ -28,27 +28,9 @@ const PicturesGrid = () => {
   const handleSelectPicture = (picture) => {
     setSelectedPicture(picture);
   };
-  // useEffect(() => {
-  //   const loadImages = async () => {
-  //     for (const picture of pictures) {
-  //       const img = new Image();
-  //       img.onload = () => {
-  //         setLoadedImagesCount((prevCount) => prevCount + 1);
-  //       };
-
-  //       img.src = picture;
-  //       await new Promise((resolve) => (img.onload = resolve));
-  //     }
-
-  //     // setImageLoaded(true);
-  //   };
-
-  //   loadImages();
-
-  //   if (loadedImagesCount === pictures.length) {
-  //     setImageLoaded(true);
-  //   }
-  // }, [pictures, loadedImagesCount]);
+  const handleCloseModal = () => {
+    setSelectedPicture(null);
+  };
 
   return (
     <>
@@ -63,31 +45,11 @@ const PicturesGrid = () => {
               className='picture'
               key={index}
             >
-              {/* <div style={{ display: imageLoaded ? 'none' : 'inline' }}>
-                <Blurhash
-                  hash='LkOyeVE0R*WC?wWAjZofM{s:RjoM'
-                  className='grid-img'
-                  width={'100%'}
-                  height={'300px'}
-                  resolutionX={32}
-                  resolutionY={32}
-                  punch={1}
-                />
-              </div> */}
-              {/* <div style={{ display: !imageLoaded ? 'none' : 'inline' }}> */}
-              {/* <LazyLoadImage
-                src={picture}
-                className='grid-img'
-                effect='blur'
-                width={'100%'}
-                alt={`Picture ${index + 1}`}
-              /> */}
               <img
                 src={picture}
                 className='grid-img'
                 alt={`Picture ${index + 1}`}
               />
-              {/* </div> */}
             </div>
           </>
         ))}
@@ -98,6 +60,38 @@ const PicturesGrid = () => {
           <div className='modal fade' id='myModal'>
             <div className='modal-dialog'>
               <div className='modal-content'>
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: 20,
+                    top: 20,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    color: 'white',
+                    backgroundColor: 'grey',
+                    zIndex: 20,
+                    borderRadius: 50,
+                    height: '30px',
+                    width: '30px',
+                  }}
+                >
+                  <button
+                    type='button'
+                    className='close'
+                    data-dismiss='modal'
+                    aria-label='Close'
+                    onClick={handleCloseModal}
+                  >
+                    <span
+                      style={{
+                        color: 'white',
+                      }}
+                      aria-hidden='true'
+                    >
+                      &times;
+                    </span>
+                  </button>
+                </div>
                 <div className='modal-body'>
                   <img
                     style={{
