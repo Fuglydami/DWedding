@@ -610,16 +610,16 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
           #DWedding
         </h5>
       </footer>
-      <CollectGuestAttendance
+      {/* <CollectGuestAttendance
         showModal={showModal}
         setShowModal={setShowModal}
+      /> */}
+      {/* {!showModal && ( */}
+      <CashGift
+        showAccountDetails={showAccountDetails}
+        setShowAccountDetails={setShowAccountDetails}
       />
-      {!showModal && (
-        <CashGift
-          showAccountDetails={showAccountDetails}
-          setShowAccountDetails={setShowAccountDetails}
-        />
-      )}
+      {/* )} */}
       {showAccountDetails && (
         <AccountDetails
           showAccountDetails={showAccountDetails}
