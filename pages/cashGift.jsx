@@ -34,7 +34,7 @@ const CashGift = ({ setShowAccountDetails, showAccountDetails }) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 10,
+          gap: 7,
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

@@ -15,7 +15,7 @@ const baseConfig = {
     hashtag: '#DWedding',
   },
   venue: {
-    name: 'Lahl Bevent Center',
+    name: 'Lagos Airport Hotel, Bevent Center',
     addressLine1: '111 obafemi awolowo way ikeja Lagos, Nigeria',
     // addressLine2: 'Eko hotel V.I Lagos State',
     city: 'Lagos',

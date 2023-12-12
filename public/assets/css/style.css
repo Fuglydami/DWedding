@@ -966,6 +966,7 @@ p {
 .slider_content .location {
   font-size: 30px;
   font-weight: 600;
+  width: 400px;
   color: #fff;
   animation: fadeIn 1s ease, scaleInTitle 3s ease;
   margin-top: 35px;
@@ -2167,10 +2168,10 @@ p.form-message.error.form-message.error {
   left: 50%;
   transform: translateX(-50%);
   position: fixed;
-  bottom: 2%;
+  bottom: 0.5%;
   z-index: 10000000;
   width: auto;
-  padding: 24px 80px;
+  padding: 15px 80px;
   border-radius: 10px;
   max-width: 670px;
   margin: 24px 0;

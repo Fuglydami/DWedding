@@ -290,10 +290,11 @@ const ShowInvite = ({ currentUrl, guestListLastUpdatedAt, guest }) => {
                           className='location'
                           data-animation='fadeInUp'
                           data-delay='1s'
-                          style={{ animationDelay: '1s' }}
+                          style={{ animationDelay: '1s', margin: '0 auto' }}
                         >
                           {hashtag}
                         </h5>
+
                         <span
                           className='location'
                           data-animation='fadeInUp'
